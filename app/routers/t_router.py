@@ -9,7 +9,10 @@ from ..database import get_db
 
 test_router = APIRouter()
 
-@test_router.post("/tests", response_model=ResponseMessage)
+@test_router.post("/tests", response_model=ResponseMessage,
+                  status_code=201,
+                  summary="Create a test",
+                  description="Create a test with a unique name")
 def create_test(test: TestCreate, db: Session = Depends(get_db)):
     return create_test_logic(test, db)
 
